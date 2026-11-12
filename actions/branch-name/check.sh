@@ -7,17 +7,17 @@ branch="${1:-}"
 
 types='feat|fix|docs|refactor|test|ci|chore|perf|build'
 patterns=(
-  "^(${types})/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$"
-  '^release/[0-9]+\.x$'
-  '^dependabot/'
-  '^release-please--'
-  '^main$'
+	"^(${types})/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$"
+	'^release/[0-9]+\.x$'
+	'^dependabot/'
+	'^release-please--'
+	'^main$'
 )
 
 for pattern in "${patterns[@]}"; do
-  if [[ "$branch" =~ $pattern ]]; then
-    exit 0
-  fi
+	if [[ "$branch" =~ $pattern ]]; then
+		exit 0
+	fi
 done
 
 echo "Branch name '${branch}' does not match the standard." >&2

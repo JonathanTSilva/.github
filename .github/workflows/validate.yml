@@ -36,12 +36,44 @@ jobs:
           else
             uvx check-jsonschema==0.39.0 --builtin-schema vendor.github-issue-forms "${forms[@]}"
           fi
+      - name: Validate composite actions
+        shell: bash
+        run: |
+          shopt -s nullglob globstar
+          actions=(actions/**/action.yml)
+          if [ "${#actions[@]}" -eq 0 ]; then
+            echo "No composite actions found, skipping"
+          else
+            uvx check-jsonschema==0.39.0 --builtin-schema vendor.github-actions "${actions[@]}"
+          fi
       - name: Lint workflows
         run: uvx --from actionlint-py==1.7.12.25 actionlint
       - name: Audit workflows
         run: uvx zizmor==1.32.0 .github/workflows
         env:
           GH_TOKEN: ${{ github.token }}
+
+  shell:
+    name: lint shell scripts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - name: shellcheck and shfmt
+        shell: bash
+        run: |
+          shopt -s nullglob globstar
+          scripts=(actions/**/*.sh)
+          if [ "${#scripts[@]}" -eq 0 ]; then
+            echo "No scripts found, skipping"
+          else
+            uvx --from shellcheck-py==0.11.0.1 shellcheck "${scripts[@]}"
+            uvx --from shfmt-py==4.2.0 shfmt -d "${scripts[@]}"
+          fi
 
   markdown:
     name: lint markdown

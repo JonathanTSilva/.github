@@ -9,4 +9,5 @@ runs:
       env:
         BRANCH: ${{ github.head_ref || github.ref_name }}
         ACTION_PATH: ${{ github.action_path }}
-      run: "$ACTION_PATH/check.sh" "$BRANCH"
+      run: |
+        "$ACTION_PATH/check.sh" "$BRANCH"

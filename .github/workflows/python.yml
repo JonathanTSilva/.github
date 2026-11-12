@@ -11,6 +11,10 @@ on:
         description: Directory of the project, relative to the repository root.
         type: string
         default: "."
+      coverage-artifact:
+        description: Name of the uploaded coverage artifact.
+        type: string
+        default: coverage
 
 permissions: read-all
 
@@ -38,6 +42,6 @@ jobs:
       - run: uv run pytest --cov --cov-report=xml
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: coverage
+          name: ${{ inputs.coverage-artifact }}
           path: ${{ inputs.working-directory }}/coverage.xml
           if-no-files-found: error

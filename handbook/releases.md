@@ -14,6 +14,8 @@
 
 Nobody edits the changelog or tags by hand. The shared `release` workflow in [`.github`](https://github.com/JonathanTSilva/.github) runs it, and each repo calls it from its `ci.yml`.
 
+Pull requests opened with the default `GITHUB_TOKEN` do not trigger CI, so the required `ci` check would never run on the release PR. Callers pass a PAT or GitHub App token with `secrets: token: ${{ secrets.RELEASE_PLEASE_TOKEN }}`. Without it releases still work, but someone has to re-trigger CI on the release PR by hand.
+
 ## Provenance
 
 When a release ships artifacts, the `release` workflow attaches a build provenance attestation with `actions/attest-build-provenance`, so anyone can verify the artifact was built by this repo's CI.
