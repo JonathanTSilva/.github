@@ -14,7 +14,9 @@
 
 Nobody edits the changelog or tags by hand. The shared `release` workflow in [`.github`](https://github.com/JonathanTSilva/.github) runs it, and each repo calls it from its `ci.yml`.
 
-Pull requests opened with the default `GITHUB_TOKEN` do not trigger CI, so the required `ci` check would never run on the release PR. Callers pass a PAT or GitHub App token with `secrets: token: ${{ secrets.RELEASE_PLEASE_TOKEN }}`. Without it releases still work, but someone has to re-trigger CI on the release PR by hand.
+Pull requests opened with the default `GITHUB_TOKEN` do not trigger CI, so the required `ci` check would never run on the release PR. Callers pass a PAT or GitHub App token with `secrets: token: ${{ secrets.RELEASE_PLEASE_TOKEN }}`.
+
+Every repo that releases needs `RELEASE_PLEASE_TOKEN`. With the account's default settings the `GITHUB_TOKEN` cannot create pull requests at all, so without the token (or without enabling "Allow GitHub Actions to create and approve pull requests" in the repo's Actions settings) release-please fails to open the release PR. Even with that setting enabled, someone has to re-trigger CI on the release PR by hand.
 
 ## Provenance
 
