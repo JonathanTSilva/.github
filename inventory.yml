@@ -24,11 +24,11 @@
   featured: false
   description: "⭐ Community health defaults, labels and the GitHub standard as data"
 
-- name: "TP-Repository"
+- name: "template-repo"
   target: "template-repo"
   kind: template
   visibility: public
-  fate: rebuild
+  fate: keep
   profile: active
   license: mit
   status: wip
