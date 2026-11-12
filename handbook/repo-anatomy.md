@@ -20,10 +20,11 @@ The `active` audit profile in [`standard.yml`](../standard.yml) requires these:
 | `.github/workflows/ci.yml` | Calls the shared workflows, see below |
 | `.github/dependabot.yml` | Ecosystem and GitHub Actions updates, grouped weekly |
 | `.github/CODEOWNERS` | Review ownership |
+| `.claude/settings.json` | Shared, safe Claude Code permissions |
 | `.devcontainer/devcontainer.json` | Makes "Open in Codespaces" work |
 | `.copier-answers.yml` | Lets `copier update` re-sync later |
 
-Also shipped by the template: `.claude/settings.json` (shared, safe permissions) and `.claude/agents/`.
+Also shipped by the template: `.claude/agents/`, `.markdownlint-cli2.yaml` and the stack's project skeleton.
 
 Community files (code of conduct, contributing, security policy, support, issue forms, PR template) come from the [`.github`](https://github.com/JonathanTSilva/.github) defaults. A repo overrides one only when it truly differs. A license cannot be a default, so it is always in the repo.
 
@@ -62,9 +63,9 @@ Shields.io badges, always `style=flat-square`, in this order, including only the
 
 ```markdown
 [![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](https://www.repostatus.org/#active)
-[![CI](https://img.shields.io/github/actions/workflow/status/JonathanTSilva/<repo>/ci.yml?style=flat-square&label=CI)](https://github.com/JonathanTSilva/<repo>/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/JonathanTSilva/<repo>/ci.yml?branch=main&style=flat-square&label=ci)](https://github.com/JonathanTSilva/<repo>/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/JonathanTSilva/<repo>?style=flat-square)](https://github.com/JonathanTSilva/<repo>/releases)
-[![License](https://img.shields.io/github/license/JonathanTSilva/<repo>?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 ```
 
 ## CI

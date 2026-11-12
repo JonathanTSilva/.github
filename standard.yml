@@ -46,6 +46,7 @@ profiles:
       - .github/workflows/ci.yml
       - .github/dependabot.yml
       - .github/CODEOWNERS
+      - .claude/settings.json
       - .devcontainer/devcontainer.json
       - .copier-answers.yml
   archived:

@@ -12,7 +12,9 @@ The human-readable standard lives in the [handbook](handbook/README.md): naming,
 |---|---|---|
 | [`standard.yml`](standard.yml) | Naming rule, repo kinds with emoji and topics, statuses, audit profiles, licenses | [`standard.schema.json`](schemas/standard.schema.json) |
 | [`labels.yml`](labels.yml) | The label set applied to every repo | [`labels.schema.json`](schemas/labels.schema.json) |
-| [`inventory.yml`](inventory.yml) | Every repo: current name, target name, kind, visibility, fate, profile, license, status | [`inventory.schema.json`](schemas/inventory.schema.json) |
+| [`inventory.yml`](inventory.yml) | Every public repo: current name, target name, kind, visibility, fate, profile, license, status | [`inventory.schema.json`](schemas/inventory.schema.json) |
+
+The inventory holds public repos only. Private repos are tracked privately, outside this repository.
 
 Each file is validated against its schema on every pull request and push to `main`.
 
