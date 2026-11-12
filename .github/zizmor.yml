@@ -1,0 +1,11 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        # Own actions are versioned by the moving major tag (v1); everything else is pinned by SHA.
+        JonathanTSilva/*: ref-pin
+        "*": hash-pin
+  # self-test uses the portable './' form for local reusable workflows.
+  self-repository:
+    ignore:
+      - self-test.yml

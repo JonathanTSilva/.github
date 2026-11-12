@@ -1,0 +1,48 @@
+name: shell
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Directory of the project, relative to the repository root.
+        type: string
+        default: "."
+
+permissions: read-all
+
+jobs:
+  check:
+    name: shellcheck, shfmt and bats
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - name: Find shell scripts
+        id: scripts
+        run: |
+          # tracked *.sh files plus tracked files whose first line is a sh/bash shebang
+          : > "$RUNNER_TEMP/scripts.txt"
+          while IFS= read -r -d '' file; do
+            if [[ "$file" == *.sh ]] || head -n 1 "$file" | grep -Eq '^#!.*\b(ba)?sh\b'; then
+              printf '%s\0' "$file" >> "$RUNNER_TEMP/scripts.txt"
+            fi
+          done < <(git ls-files -z)
+          echo "Found $(tr -cd '\0' < "$RUNNER_TEMP/scripts.txt" | wc -c) shell scripts"
+      - name: shellcheck
+        run: xargs -0 -r uvx --from shellcheck-py==0.11.0.1 shellcheck < "$RUNNER_TEMP/scripts.txt"
+      - name: shfmt
+        run: xargs -0 -r uvx --from shfmt-py==4.2.0 shfmt -d < "$RUNNER_TEMP/scripts.txt"
+      - name: bats
+        run: |
+          if [ -d test ]; then
+            npx --yes bats@1.13.0 test/
+          else
+            echo "No test/ directory, skipping bats"
+          fi

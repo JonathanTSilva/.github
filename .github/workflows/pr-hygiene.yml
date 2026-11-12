@@ -1,0 +1,37 @@
+name: pr-hygiene
+
+on:
+  workflow_call:
+
+permissions: read-all
+
+jobs:
+  title:
+    name: conventional PR title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@2252a14e810aa9b85c2d560bd7070c802206ecf6 # v6.1.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            refactor
+            test
+            ci
+            chore
+            perf
+            build
+
+  branch:
+    name: branch name
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - uses: JonathanTSilva/.github/actions/branch-name@v1

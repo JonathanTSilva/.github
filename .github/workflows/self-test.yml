@@ -1,0 +1,41 @@
+name: self-test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions: read-all
+
+jobs:
+  python:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/python.yml
+    with:
+      working-directory: tests/fixtures/python-min
+
+  node:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/node.yml
+    with:
+      working-directory: tests/fixtures/node-min
+
+  shell:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/shell.yml
+    with:
+      working-directory: tests/fixtures/shell-min
+
+  branch-name:
+    name: branch-name tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: npx --yes bats@1.13.0 tests/branch-name.bats

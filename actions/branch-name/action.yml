@@ -1,0 +1,12 @@
+name: Check branch name
+description: Fail unless the branch is named <type>/<issue>-<slug>, release/<major>.x or a bot branch.
+
+runs:
+  using: composite
+  steps:
+    - name: Check branch name
+      shell: bash
+      env:
+        BRANCH: ${{ github.head_ref || github.ref_name }}
+        ACTION_PATH: ${{ github.action_path }}
+      run: "$ACTION_PATH/check.sh" "$BRANCH"

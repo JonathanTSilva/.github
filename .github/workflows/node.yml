@@ -1,0 +1,42 @@
+name: node
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version to run with.
+        type: string
+        default: "24"
+      working-directory:
+        description: Directory of the project, relative to the repository root.
+        type: string
+        default: "."
+
+permissions: read-all
+
+jobs:
+  check:
+    name: lint, types and tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # pnpm version comes from "packageManager" in package.json
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          package_json_file: ${{ inputs.working-directory }}/package.json
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+          cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run --if-present lint
+      - run: pnpm run --if-present typecheck
+      - run: pnpm run --if-present test

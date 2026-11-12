@@ -1,0 +1,19 @@
+[project]
+name = "pkg"
+version = "0.1.0"
+description = "Smallest passing Python project, used to self-test the reusable python workflow."
+requires-python = ">=3.13"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = ["pyright", "pytest", "pytest-cov", "ruff"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["pkg"]
