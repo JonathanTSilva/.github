@@ -28,4 +28,4 @@ Change the data file and its schema together, then open a pull request. Branches
 
 ## License
 
-MIT. The license file is added with the standard repo files.
+MIT. See [LICENSE](LICENSE).

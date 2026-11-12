@@ -1,3 +1,4 @@
 config:
   MD013: false  # prose is one line per paragraph
   MD060: false  # table pipe spacing
+  MD041: false  # the PR template starts at level 2 on purpose

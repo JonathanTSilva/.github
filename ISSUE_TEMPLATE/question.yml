@@ -1,0 +1,21 @@
+name: Question
+description: Ask how something works or how to use it
+labels: ["status: needs-info"]
+body:
+  - type: markdown
+    attributes:
+      value: Where Discussions are enabled, please ask there instead. Otherwise this form is the right place.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Include what you tried and what you read so far.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Release tag or commit SHA, if relevant.
+    validations:
+      required: false
