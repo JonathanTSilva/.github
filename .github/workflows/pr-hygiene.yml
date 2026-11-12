@@ -3,7 +3,7 @@ name: pr-hygiene
 on:
   workflow_call:
 
-permissions: read-all
+permissions: {}
 
 jobs:
   title:

@@ -16,7 +16,7 @@ on:
         description: PAT or GitHub App token so the release PR triggers CI
         required: false
 
-permissions: read-all
+permissions: {}
 
 jobs:
   release-please:
