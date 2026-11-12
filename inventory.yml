@@ -90,6 +90,17 @@
   featured: true
   description: "➕ A TUI-based LeetCode cheatsheet for quick problem walkthroughs in your terminal"
 
+- name: "qemulab"
+  target: "qemulab"
+  kind: product
+  visibility: public
+  fate: keep
+  profile: active
+  license: mit
+  status: wip
+  featured: true
+  description: "➕ A modern TUI for managing QEMU development environments"
+
 - name: "SI-Cavitation"
   target: "research-pump-cavitation"
   kind: research
