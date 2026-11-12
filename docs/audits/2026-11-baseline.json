@@ -1,0 +1,1302 @@
+{
+  "generated_at": "2026-11-12T15:42:46Z",
+  "summary": {
+    "total": 24,
+    "compliant": 4,
+    "percent": 17,
+    "ci_green": 6,
+    "ci_total": 7
+  },
+  "repos": [
+    {
+      "name": ".github",
+      "visibility": "public",
+      "archived": false,
+      "kind": "special",
+      "profile": "special",
+      "status": "wip",
+      "fate": "create",
+      "ci": "success",
+      "compliant": true,
+      "errors": 0,
+      "warnings": 1,
+      "findings": [
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "FP-CloudCavitation",
+      "visibility": "public",
+      "archived": false,
+      "kind": "research",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with 🔬"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'FP-CloudCavitation' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'research' needs prefix 'research-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-research"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "FP-Dimfot",
+      "visibility": "public",
+      "archived": false,
+      "kind": "course",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with 📖"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'FP-Dimfot' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'course' needs prefix 'course-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-course"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "FP-MastersDegree",
+      "visibility": "public",
+      "archived": false,
+      "kind": "research",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with 🔬"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'FP-MastersDegree' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'research' needs prefix 'research-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-research"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "HL-Git",
+      "visibility": "public",
+      "archived": false,
+      "kind": "learn",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'HL-Git' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'learn' needs prefix 'learn-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-learn"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "HL-Java",
+      "visibility": "public",
+      "archived": false,
+      "kind": "learn",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'HL-Java' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'learn' needs prefix 'learn-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-learn"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "HL-Linux",
+      "visibility": "public",
+      "archived": false,
+      "kind": "learn",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'HL-Linux' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'learn' needs prefix 'learn-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-learn"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "HL-Python",
+      "visibility": "public",
+      "archived": false,
+      "kind": "learn",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with 🛠"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'HL-Python' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'learn' needs prefix 'learn-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-learn"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "HL-Windows",
+      "visibility": "public",
+      "archived": false,
+      "kind": "learn",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'HL-Windows' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'learn' needs prefix 'learn-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-learn"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "JonathanTSilva",
+      "visibility": "public",
+      "archived": false,
+      "kind": "special",
+      "profile": "special",
+      "status": "wip",
+      "fate": "rebuild",
+      "ci": "success",
+      "compliant": false,
+      "errors": 1,
+      "warnings": 1,
+      "findings": [
+        {
+          "check": "license.missing",
+          "severity": "error",
+          "message": "public repo has no detected license"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "OD-Cheatsheets",
+      "visibility": "public",
+      "archived": false,
+      "kind": "product",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 1,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with ➕"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'OD-Cheatsheets' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-product"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "SI-Cavitation",
+      "visibility": "public",
+      "archived": false,
+      "kind": "research",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'SI-Cavitation' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'research' needs prefix 'research-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-research"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "SI-Sizer",
+      "visibility": "public",
+      "archived": false,
+      "kind": "research",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'SI-Sizer' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'research' needs prefix 'research-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-research"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "TP-IFSP",
+      "visibility": "public",
+      "archived": false,
+      "kind": "template",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'TP-IFSP' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'template' needs prefix 'template-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-template"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "TP-Standardization",
+      "visibility": "public",
+      "archived": false,
+      "kind": "template",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 2,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "'TP-Standardization' does not match ^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        {
+          "check": "name.convention",
+          "severity": "error",
+          "message": "kind 'template' needs prefix 'template-' followed by a subject"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-template"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "jonathantsilva.github.io",
+      "visibility": "public",
+      "archived": false,
+      "kind": "special",
+      "profile": "special",
+      "status": "archived",
+      "fate": "redirect-archive",
+      "ci": "success",
+      "compliant": true,
+      "errors": 0,
+      "warnings": 1,
+      "findings": [
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "jts-ops",
+      "visibility": "public",
+      "archived": false,
+      "kind": "jts",
+      "profile": "active",
+      "status": "wip",
+      "fate": "create",
+      "ci": "success",
+      "compliant": true,
+      "errors": 0,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "labels.missing",
+          "severity": "warning",
+          "message": "missing labels: type: bug, type: feature, type: docs, type: refactor, type: test, type: ci, type: chore, type: security, priority: p0, priority: p1, priority: p2, priority: p3, status: triage, status: blocked, status: in-progress, status: needs-info, size: xs, size: s, size: m, size: l, size: xl, ai-generated"
+        },
+        {
+          "check": "settings.merge",
+          "severity": "warning",
+          "message": "merge commit is on; rebase merge is on; delete branch on merge is off"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-jts"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-wip"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "jts-website",
+      "visibility": "public",
+      "archived": false,
+      "kind": "jts",
+      "profile": "active",
+      "status": "active",
+      "fate": "keep",
+      "ci": "success",
+      "compliant": false,
+      "errors": 10,
+      "warnings": 6,
+      "findings": [
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with 🧠"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .claude/settings.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .copier-answers.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .devcontainer/devcontainer.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/CODEOWNERS"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/dependabot.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/workflows/ci.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .pre-commit-config.yaml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing AGENTS.md"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing LICENSE"
+        },
+        {
+          "check": "labels.missing",
+          "severity": "warning",
+          "message": "missing labels: type: bug, type: feature, type: docs, type: refactor, type: test, type: ci, type: chore, type: security, priority: p0, priority: p1, priority: p2, priority: p3, status: triage, status: blocked, status: in-progress, status: needs-info, size: xs, size: s, size: m, size: l, size: xl, dependencies, ai-generated"
+        },
+        {
+          "check": "license.missing",
+          "severity": "error",
+          "message": "public repo has no detected license"
+        },
+        {
+          "check": "settings.merge",
+          "severity": "warning",
+          "message": "merge commit is on; rebase merge is on; delete branch on merge is off"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-jts"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-active"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "leetsheet",
+      "visibility": "public",
+      "archived": false,
+      "kind": "product",
+      "profile": "active",
+      "status": "active",
+      "fate": "keep",
+      "ci": null,
+      "compliant": false,
+      "errors": 13,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .claude/settings.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .copier-answers.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .devcontainer/devcontainer.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .editorconfig"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/CODEOWNERS"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/dependabot.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/workflows/ci.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .gitignore"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .pre-commit-config.yaml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing AGENTS.md"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing CLAUDE.md"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing LICENSE"
+        },
+        {
+          "check": "labels.missing",
+          "severity": "warning",
+          "message": "missing labels: type: bug, type: feature, type: docs, type: refactor, type: test, type: ci, type: chore, type: security, priority: p0, priority: p1, priority: p2, priority: p3, status: triage, status: blocked, status: in-progress, status: needs-info, size: xs, size: s, size: m, size: l, size: xl, dependencies, ai-generated"
+        },
+        {
+          "check": "license.missing",
+          "severity": "error",
+          "message": "public repo has no detected license"
+        },
+        {
+          "check": "settings.merge",
+          "severity": "warning",
+          "message": "merge commit is on; rebase merge is on; delete branch on merge is off"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-product"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-active"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "scriptize",
+      "visibility": "public",
+      "archived": false,
+      "kind": "product",
+      "profile": "active",
+      "status": "active",
+      "fate": "keep",
+      "ci": "failure",
+      "compliant": false,
+      "errors": 8,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "ci.failing",
+          "severity": "error",
+          "message": "latest CI run on the default branch failed"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .claude/settings.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .copier-answers.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .devcontainer/devcontainer.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/CODEOWNERS"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/dependabot.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing AGENTS.md"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing CLAUDE.md"
+        },
+        {
+          "check": "labels.missing",
+          "severity": "warning",
+          "message": "missing labels: type: bug, type: feature, type: docs, type: refactor, type: test, type: ci, type: chore, type: security, priority: p0, priority: p1, priority: p2, priority: p3, status: triage, status: blocked, status: in-progress, status: needs-info, size: xs, size: s, size: m, size: l, size: xl, dependencies, ai-generated"
+        },
+        {
+          "check": "settings.merge",
+          "severity": "warning",
+          "message": "merge commit is on; rebase merge is on; delete branch on merge is off"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-product"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-active"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "sentminer",
+      "visibility": "public",
+      "archived": false,
+      "kind": "product",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": true,
+      "errors": 0,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "description.emoji",
+          "severity": "warning",
+          "message": "description must start with ➕"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-product"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "slip-box-notes",
+      "visibility": "public",
+      "archived": false,
+      "kind": "product",
+      "profile": "archived",
+      "status": "archived",
+      "fate": "archive",
+      "ci": null,
+      "compliant": false,
+      "errors": 1,
+      "warnings": 4,
+      "findings": [
+        {
+          "check": "archived.banner",
+          "severity": "warning",
+          "message": "README has no archive banner"
+        },
+        {
+          "check": "archived.flag",
+          "severity": "info",
+          "message": "inventory profile is archived but repo is not"
+        },
+        {
+          "check": "license.missing",
+          "severity": "error",
+          "message": "public repo has no detected license"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-product"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-archived"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "template-repo",
+      "visibility": "public",
+      "archived": false,
+      "kind": "template",
+      "profile": "active",
+      "status": "wip",
+      "fate": "keep",
+      "ci": "success",
+      "compliant": false,
+      "errors": 1,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .copier-answers.yml"
+        },
+        {
+          "check": "labels.missing",
+          "severity": "warning",
+          "message": "missing labels: type: bug, type: feature, type: docs, type: refactor, type: test, type: ci, type: chore, type: security, priority: p0, priority: p1, priority: p2, priority: p3, status: triage, status: blocked, status: in-progress, status: needs-info, size: xs, size: s, size: m, size: l, size: xl, dependencies, ai-generated"
+        },
+        {
+          "check": "settings.merge",
+          "severity": "warning",
+          "message": "merge commit is on; rebase merge is on; delete branch on merge is off"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-template"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-wip"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    },
+    {
+      "name": "uanalyser",
+      "visibility": "public",
+      "archived": false,
+      "kind": "product",
+      "profile": "active",
+      "status": "inactive",
+      "fate": "keep",
+      "ci": null,
+      "compliant": false,
+      "errors": 12,
+      "warnings": 5,
+      "findings": [
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .claude/settings.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .copier-answers.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .devcontainer/devcontainer.json"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .editorconfig"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/CODEOWNERS"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/dependabot.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .github/workflows/ci.yml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing .pre-commit-config.yaml"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing AGENTS.md"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing CLAUDE.md"
+        },
+        {
+          "check": "files.required",
+          "severity": "error",
+          "message": "missing LICENSE"
+        },
+        {
+          "check": "labels.missing",
+          "severity": "warning",
+          "message": "missing labels: type: bug, type: feature, type: docs, type: refactor, type: test, type: ci, type: chore, type: security, priority: p0, priority: p1, priority: p2, priority: p3, status: triage, status: blocked, status: in-progress, status: needs-info, size: xs, size: s, size: m, size: l, size: xl, dependencies, ai-generated"
+        },
+        {
+          "check": "license.missing",
+          "severity": "error",
+          "message": "public repo has no detected license"
+        },
+        {
+          "check": "settings.merge",
+          "severity": "warning",
+          "message": "merge commit is on; rebase merge is on; delete branch on merge is off"
+        },
+        {
+          "check": "topics.kind",
+          "severity": "warning",
+          "message": "missing topic kind-product"
+        },
+        {
+          "check": "topics.status",
+          "severity": "warning",
+          "message": "missing topic status-inactive"
+        },
+        {
+          "check": "wiki.enabled",
+          "severity": "warning",
+          "message": "wiki is enabled; docs live in the repo"
+        }
+      ]
+    }
+  ]
+}
