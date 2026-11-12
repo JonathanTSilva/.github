@@ -1,0 +1,101 @@
+# Labels applied to every repo by jts-ops. Validated by schemas/labels.schema.json.
+
+- name: "type: bug"
+  color: "d22d48"
+  description: "Something is broken"
+
+- name: "type: feature"
+  color: "d22d48"
+  description: "New capability or enhancement"
+
+- name: "type: docs"
+  color: "d22d48"
+  description: "Documentation only"
+
+- name: "type: refactor"
+  color: "d22d48"
+  description: "Code change that neither fixes a bug nor adds a feature"
+
+- name: "type: test"
+  color: "d22d48"
+  description: "Adding or fixing tests"
+
+- name: "type: ci"
+  color: "d22d48"
+  description: "CI and automation changes"
+
+- name: "type: chore"
+  color: "d22d48"
+  description: "Maintenance with no user-facing change"
+
+- name: "type: security"
+  color: "d22d48"
+  description: "Security fix or hardening"
+
+- name: "priority: p0"
+  color: "a85b24"
+  description: "Drop everything"
+
+- name: "priority: p1"
+  color: "d78042"
+  description: "High, next up"
+
+- name: "priority: p2"
+  color: "e4aa81"
+  description: "Normal"
+
+- name: "priority: p3"
+  color: "f2d5c0"
+  description: "Low, when time allows"
+
+- name: "status: triage"
+  color: "2d7fd2"
+  description: "Not yet assessed"
+
+- name: "status: blocked"
+  color: "2d7fd2"
+  description: "Waiting on something else"
+
+- name: "status: in-progress"
+  color: "2d7fd2"
+  description: "Being worked on"
+
+- name: "status: needs-info"
+  color: "2d7fd2"
+  description: "Waiting for more information"
+
+- name: "size: xs"
+  color: "591f93"
+  description: "Under an hour"
+
+- name: "size: s"
+  color: "7328bd"
+  description: "A few hours"
+
+- name: "size: m"
+  color: "8c42d7"
+  description: "About a day"
+
+- name: "size: l"
+  color: "a66ce0"
+  description: "A few days"
+
+- name: "size: xl"
+  color: "bf96e9"
+  description: "A week or more"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed"
+
+- name: "dependencies"
+  color: "0366d6"
+  description: "Dependency updates"
+
+- name: "ai-generated"
+  color: "c5def5"
+  description: "Produced with AI assistance"

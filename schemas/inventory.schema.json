@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Repo inventory",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["name", "target", "kind", "visibility", "fate", "profile", "license", "status", "featured", "description"],
+    "properties": {
+      "name": { "type": "string", "minLength": 1 },
+      "target": { "type": "string", "minLength": 1 },
+      "kind": {
+        "enum": ["product", "jts", "ai", "research", "course", "learn", "template", "challenge", "poc", "infra", "action", "obsidian-plugin", "homebrew-tap", "awesome", "special"]
+      },
+      "visibility": { "enum": ["public", "private"] },
+      "fate": { "enum": ["keep", "archive", "rebuild", "create", "publish", "redirect-archive"] },
+      "profile": { "enum": ["active", "archived", "exempt", "special"] },
+      "license": { "enum": ["mit", "cc-by-4.0", "mit+cc-by-4.0", "proprietary", "agpl-3.0", "company"] },
+      "status": { "enum": ["concept", "wip", "active", "inactive", "unsupported", "archived"] },
+      "featured": { "type": "boolean" },
+      "description": { "type": "string", "minLength": 1, "pattern": "[^.]$" }
+    }
+  }
+}

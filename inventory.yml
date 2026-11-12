@@ -1,0 +1,267 @@
+# Repo inventory for repos that are public (or become public in Plan 1): current name, target name, fate.
+# Validated by schemas/inventory.schema.json. visibility is the target visibility.
+# profile selects the standard.yml file set to audit. Private repos are listed outside this repo.
+
+- name: "JonathanTSilva"
+  target: "JonathanTSilva"
+  kind: special
+  visibility: public
+  fate: rebuild
+  profile: special
+  license: mit
+  status: wip
+  featured: false
+  description: "⭐ Profile README for Jonathan Tobias, senior embedded software engineer"
+
+- name: ".github"
+  target: ".github"
+  kind: special
+  visibility: public
+  fate: create
+  profile: special
+  license: mit
+  status: wip
+  featured: false
+  description: "⭐ Community health defaults, labels and the GitHub standard as data"
+
+- name: "TP-Repository"
+  target: "template-repo"
+  kind: template
+  visibility: public
+  fate: rebuild
+  profile: active
+  license: mit
+  status: wip
+  featured: false
+  description: "📚 Copier template that generates new repositories with the standard structure and files"
+
+- name: "jts-ops"
+  target: "jts-ops"
+  kind: jts
+  visibility: public
+  fate: create
+  profile: active
+  license: mit
+  status: wip
+  featured: false
+  description: "🧠 CLI that audits and applies the GitHub standard across all repositories"
+
+- name: "jts-website"
+  target: "jts-website"
+  kind: jts
+  visibility: public
+  fate: keep
+  profile: active
+  license: mit+cc-by-4.0
+  status: active
+  featured: true
+  description: "🧠 Personal bilingual website built with Astro and deployed to GitHub Pages"
+
+- name: "scriptize"
+  target: "scriptize"
+  kind: product
+  visibility: public
+  fate: keep
+  profile: active
+  license: mit
+  status: active
+  featured: true
+  description: "➕ Standardize the scripting environment to improve the maintainability, readability and efficiency of your scripts"
+
+- name: "uanalyser"
+  target: "uanalyser"
+  kind: product
+  visibility: public
+  fate: keep
+  profile: active
+  license: mit
+  status: inactive
+  featured: true
+  description: "➕ Traffic analyser for intrusion detection in OPC UA networks"
+
+- name: "leetsheet"
+  target: "leetsheet"
+  kind: product
+  visibility: public
+  fate: keep
+  profile: active
+  license: mit
+  status: active
+  featured: true
+  description: "➕ A TUI-based LeetCode cheatsheet for quick problem walkthroughs in your terminal"
+
+- name: "SI-Cavitation"
+  target: "research-pump-cavitation"
+  kind: research
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: true
+  description: "🔬 Diagnostic system for hydraulic pump failures by means of electric current analysis and machine learning tools"
+
+- name: "SI-Sizer"
+  target: "research-motor-drive-sizer"
+  kind: research
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🔬 Web application for sizing electric motor drive equipment"
+
+- name: "FP-CloudCavitation"
+  target: "research-cloud-cavitation"
+  kind: research
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🔬 Cloud-based intelligent system for hydraulic pump failure detection"
+
+- name: "FP-MastersDegree"
+  target: "research-masters-dissertation"
+  kind: research
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🔬 Projects and dissertation for my Master of Science in Electrical Engineering"
+
+- name: "FP-Dimfot"
+  target: "course-dimfot-android"
+  kind: course
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "📖 Android application for the Mobile Computing (E8CPM) course at IFSP Sertãozinho"
+
+- name: "HL-Linux"
+  target: "learn-linux"
+  kind: learn
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🛠 Personal repository to document my learning on Linux"
+
+- name: "HL-Git"
+  target: "learn-git"
+  kind: learn
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🛠 Personal repository for testing Git, GitHub and GitFlow commands"
+
+- name: "HL-Python"
+  target: "learn-python"
+  kind: learn
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🛠 Personal repository to document my learning on Python"
+
+- name: "HL-Java"
+  target: "learn-java"
+  kind: learn
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🛠 Personal repository to document my learning on Java"
+
+- name: "HL-Windows"
+  target: "learn-windows"
+  kind: learn
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "🛠 Personal repository to document my learning on Windows"
+
+- name: "TP-IFSP"
+  target: "template-latex-ifsp"
+  kind: template
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "📚 LaTeX templates for the Federal Institute of São Paulo, Sertãozinho campus"
+
+- name: "TP-Standardization"
+  target: "template-standardization"
+  kind: template
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "📚 A set of specifications to constrain, organize and standardize projects"
+
+- name: "OD-Cheatsheets"
+  target: "cheatsheets"
+  kind: product
+  visibility: public
+  fate: archive
+  profile: archived
+  license: cc-by-4.0
+  status: archived
+  featured: false
+  description: "➕ All cheat sheets, round-ups and quick reference guides in one page"
+
+- name: "sentminer"
+  target: "sentminer"
+  kind: product
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "➕ Anki add-on for mining sentences in English"
+
+- name: "slip-box-notes"
+  target: "slip-box-notes"
+  kind: product
+  visibility: public
+  fate: archive
+  profile: archived
+  license: mit
+  status: archived
+  featured: false
+  description: "➕ My personal slip-box notes website, superseded by the notes on jts-website"
+
+- name: "jonathantsilva.github.io"
+  target: "jonathantsilva.github.io"
+  kind: special
+  visibility: public
+  fate: redirect-archive
+  profile: special
+  license: mit
+  status: archived
+  featured: false
+  description: "⭐ GitHub Pages user site that redirects to jontobias.com"
