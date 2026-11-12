@@ -2,6 +2,10 @@
 
 The GitHub standard for [JonathanTSilva](https://github.com/JonathanTSilva), kept as data. The tools in [jts-ops](https://github.com/JonathanTSilva/jts-ops) read these files to audit and apply the standard across every repo.
 
+## Handbook
+
+The human-readable standard lives in the [handbook](handbook/README.md): naming, branches and commits, releases, repo anatomy, labels, security, licensing, forks, archiving, publishing, AI assistance and planning.
+
 ## Data files
 
 | File | Holds | Schema |
