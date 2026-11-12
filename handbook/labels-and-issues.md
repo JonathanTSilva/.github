@@ -32,7 +32,9 @@ Source: [`labels.yml`](../labels.yml). `jts-ops` applies the same set to every r
 | `dependencies` | Dependency updates |
 | `ai-generated` | Produced with AI assistance |
 
-Colors are shared per group: all `type:` labels are one color, and `priority:` and `size:` are gradients.
+Colors are shared per group: all `type:` labels are one color, all `status:` labels are one color, and `priority:` and `size:` are gradients.
+
+The `ai-generated` label marks an issue or PR opened autonomously by an agent. A normal AI-assisted PR does not get it; it uses the AI assistance section of the PR template instead.
 
 ## Issue forms
 
@@ -40,4 +42,4 @@ Defaults from [`.github`](https://github.com/JonathanTSilva/.github/tree/main/IS
 
 ## Pull request template
 
-Every PR answers: summary, linked issue, type, how it was tested, a checklist, and an **AI assistance** section stating which tool or model helped and what it did. Anything produced with AI help carries the `ai-generated` label. See [AI assistance](ai.md).
+Every PR answers: summary, linked issue, type, how it was tested, a checklist, and an **AI assistance** section stating which tool or model helped and what it did. See [AI assistance](ai.md).

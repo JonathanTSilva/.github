@@ -16,7 +16,7 @@ Source: [`standard.yml`](../standard.yml). Each repo carries the topic in the la
 | Research | `research-<subject>` | 🔬 | Academic research and theses | `research-pump-cavitation` | `kind-research` |
 | Course | `course-<subject>` | 📖 | Coursework, class projects | `course-signal-processing` | `kind-course` |
 | Learning lab | `learn-<subject>` | 🛠 | Code written while learning a technology | `learn-git` | `kind-learn` |
-| Template | `template-<subject>` | 📚 | Template repositories | `template-repo` | `kind-template` |
+| Template | `template-<subject>` | 📚 | Copier template repositories | `template-repo` | `kind-template` |
 | Challenge | `challenge-<subject>` | 🏁 | Coding tests, katas, interview challenges | `challenge-linked-list` | `kind-challenge` |
 | Proof of concept | `poc-<subject>` | 🧪 | Throwaway experiments | `poc-ble-scanner` | `kind-poc` |
 | Infrastructure | `infra-<subject>` | 🏗 | IaC, server and network configs | `infra-home-server` | `kind-infra` |
@@ -26,7 +26,7 @@ Source: [`standard.yml`](../standard.yml). Each repo carries the topic in the la
 | Awesome list | `awesome-<subject>` | 🕶 | Curated lists | `awesome-embedded` | `kind-awesome` |
 | Special | fixed by GitHub | ⭐ | Profile, Pages user site, community defaults | `JonathanTSilva`, `jonathantsilva.github.io`, `.github` | `kind-special` |
 
-Examples other than the real repos named in [`inventory.yml`](../inventory.yml) are invented. A new kind is added to [`standard.yml`](../standard.yml) first, then to this table: plain English word, then subject.
+Examples not found in [`inventory.yml`](../inventory.yml) are illustrative. New kinds follow the same pattern (plain English word, then subject) and are added to [`standard.yml`](../standard.yml) first.
 
 ## Repo metadata
 

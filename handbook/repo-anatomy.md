@@ -1,6 +1,8 @@
 # Repo anatomy
 
-Every active repo has the same files, README structure, badge row and CI shape. New repos get all of it from `jts-ops new`, which renders the Copier template [`template-repo`](https://github.com/JonathanTSilva/template-repo). The template supports the stacks `python`, `node`, `shell` and `none`; more arrive later. Run `copier update` to re-sync a repo when the standard changes. The `.copier-answers.yml` file is what makes that possible.
+Every active repo has the same files, README structure, badge row and CI shape. New repos get all of it from `jts-ops new`, which renders the Copier template [`template-repo`](https://github.com/JonathanTSilva/template-repo). The template supports the stacks `python`, `node`, `shell` and `none`; more arrive later. Run `copier update` to re-sync a repo when the standard changes.
+
+`template-repo` is not a GitHub template repository: the "Use this template" button would copy unrendered Jinja, so new repos are created with `jts-ops new`.
 
 ## Files
 
@@ -59,6 +61,7 @@ Shields.io badges, always `style=flat-square`, in this order, including only the
 | 8 | Codespaces | "Open in Codespaces" link |
 
 ```markdown
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](https://www.repostatus.org/#active)
 [![CI](https://img.shields.io/github/actions/workflow/status/JonathanTSilva/<repo>/ci.yml?style=flat-square&label=CI)](https://github.com/JonathanTSilva/<repo>/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/JonathanTSilva/<repo>?style=flat-square)](https://github.com/JonathanTSilva/<repo>/releases)
 [![License](https://img.shields.io/github/license/JonathanTSilva/<repo>?style=flat-square)](LICENSE)

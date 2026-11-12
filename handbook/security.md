@@ -2,7 +2,7 @@
 
 ## Reporting
 
-Every repo has a [security policy](https://github.com/JonathanTSilva/.github/blob/main/SECURITY.md) and private vulnerability reporting turned on. Vulnerabilities are never reported in public issues.
+Every repo has a [security policy](https://github.com/JonathanTSilva/.github/blob/main/SECURITY.md); public repos also have private vulnerability reporting turned on. Vulnerabilities are never reported in public issues.
 
 ## What is turned on
 
@@ -11,7 +11,7 @@ Every repo has a [security policy](https://github.com/JonathanTSilva/.github/blo
 | Dependabot | Alerts and security updates on, plus a weekly grouped update for the stack and GitHub Actions |
 | Secret scanning and push protection | On for public repos (GitHub native) |
 | gitleaks | In pre-commit and in CI, so private repos are covered too |
-| CodeQL | Default setup, where the language is supported |
+| CodeQL | Default setup on public repos, where the language is supported |
 | Dependency review | On pull requests of public repos |
 | OpenSSF Scorecard | Workflow and badge on public repos |
 | Provenance | Release artifacts are attested, see [releases](releases.md) |

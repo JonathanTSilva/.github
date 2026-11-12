@@ -11,7 +11,7 @@ Archived repos get the **archive kit** and nothing else. Old code is not moderni
 5. Add a `LICENSE` if the repo is public and has none (see [licensing](licensing.md)).
 6. Archive the repo (read-only).
 
-Archiving is irreversible in practice, so it is done from a reviewed list, never one repo at a time on impulse.
+Archiving goes on the reviewed list of irreversible actions (see [AI assistance](ai.md)), so it is batched and approved, never done ad hoc.
 
 ## Banner
 

@@ -6,7 +6,7 @@ Every repo is set up for coding agents, and the setup is built into the template
 
 | File | Role |
 |---|---|
-| `AGENTS.md` | The single source of agent instructions, read by Codex, Cursor, Copilot, Gemini, Claude Code and others |
+| `AGENTS.md` | The single source of agent instructions, read by Codex, Cursor, Copilot, Gemini and others |
 | `CLAUDE.md` | Contains only `@AGENTS.md`, so Claude Code imports it and nothing is duplicated |
 
 `AGENTS.md` sections: project overview, setup, test and lint commands, conventions (pointing back to this handbook), boundaries (never commit secrets, never push to `main`), and model routing.
@@ -32,4 +32,4 @@ Every repo is set up for coding agents, and the setup is built into the template
 
 ## Disclosure
 
-Pull requests state which tool or model helped and what it did, and AI-assisted work carries the `ai-generated` label. A human verifies everything before merge. See [labels and issues](labels-and-issues.md).
+Pull requests state which tool or model helped and what it did, in the AI assistance section of the PR template. A human verifies everything before merge. The `ai-generated` label has its own narrower meaning, see [labels and issues](labels-and-issues.md).

@@ -6,11 +6,11 @@ All repos share one user-level GitHub Project, **Engineering**. Issues and pull 
 
 | Field | Values |
 |---|---|
-| Status | Where the item is in its flow |
+| Status | Inbox, Todo, In progress, Blocked, Done |
 | Priority | Matches the `priority:` labels |
 | Area | The repo kind, see [naming](naming.md) |
 | Size | Matches the `size:` labels |
-| Iteration | The current cycle |
+| Iteration | 2-week cycles |
 | Target date | Used by the roadmap |
 
 | View | Shows |
@@ -22,12 +22,12 @@ All repos share one user-level GitHub Project, **Engineering**. Issues and pull 
 
 ## Discussions
 
-On for featured products, for open questions and announcements. Off elsewhere. Issues are for work, Discussions are for conversation.
+On for featured products, and for `.github` itself, which hosts "Ask me" and "Announcements". If `.github` can't host that well, the profile repo `JonathanTSilva` does instead. Off everywhere else. Issues are for work, Discussions are for conversation.
 
 ## Wikis
 
-Off everywhere. Documentation lives in the repo (`README.md`, `docs/`) so it is versioned, reviewed and found by search. Existing wiki content is moved into the repo before the wiki is turned off.
+Off everywhere. Documentation lives in the repo (`README.md`, `docs/`) so it is versioned, reviewed and found by search. Existing wiki content is moved into the repo's `docs/` before the wiki is turned off. For example, the wiki of `learn-windows` moves into its `docs/` first.
 
 ## Where plans live
 
-Specs and plans for a repo are saved in that repo, under `docs/`. Ideas that start elsewhere become an issue on the repo they concern.
+Specs and plans for a repo are saved in that repo, under `docs/` (except where a plan names private work, which then stays local). Ideas that start elsewhere become an issue on the repo they concern.

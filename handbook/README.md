@@ -1,10 +1,10 @@
 # Handbook
 
-The engineering standard behind every repo on [JonathanTSilva](https://github.com/JonathanTSilva). It is short on purpose: each page states the rule, and the tooling checks it.
+The engineering standard behind every repo on [JonathanTSilva](https://github.com/JonathanTSilva). It is short on purpose: each page states the rule. Where a rule can be checked, `jts-ops audit` or CI checks it; the audit profiles in [`standard.yml`](../standard.yml) define what is checked.
 
 ## Why
 
-Organization is part of the work. Every repo here uses the same names, files, badges, CI and release flow, so you can open any of them and know where things are. The standard is data (see [`standard.yml`](../standard.yml), [`labels.yml`](../labels.yml) and [`inventory.yml`](../inventory.yml)), and [jts-ops](https://github.com/JonathanTSilva/jts-ops) audits it, so it cannot quietly drift. New repos are created from the Copier template [`template-repo`](https://github.com/JonathanTSilva/template-repo) with `jts-ops new`, and existing repos are re-synced with `copier update`.
+Organization is part of the work. Every active repo here uses the same names, files, badges, CI and release flow, so you can open any of them and know where things are. The standard is data (see [`standard.yml`](../standard.yml), [`labels.yml`](../labels.yml) and [`inventory.yml`](../inventory.yml)), and [jts-ops](https://github.com/JonathanTSilva/jts-ops) audits it, so it cannot quietly drift. New repos are created from the Copier template [`template-repo`](https://github.com/JonathanTSilva/template-repo) with `jts-ops new`, and existing repos are re-synced with `copier update`.
 
 ## Pages
 
@@ -26,6 +26,4 @@ Organization is part of the work. Every repo here uses the same names, files, ba
 ## Principles
 
 - Documentation lives in the repo it describes.
-- A rule that is not checked is not a rule. The audit profiles in [`standard.yml`](../standard.yml) define what is checked.
 - The ecosystem wins when it requires a name or a file.
-- The inventory is split: [`inventory.yml`](../inventory.yml) lists public repos only. Private repos are tracked in a private file outside any public repo.
