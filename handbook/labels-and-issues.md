@@ -30,7 +30,7 @@ Source: [`labels.yml`](../labels.yml). `jts-ops` applies the same set to every r
 | `good first issue` | Good for newcomers |
 | `help wanted` | Extra attention is needed |
 | `dependencies` | Dependency updates |
-| `ai-generated` | Produced with AI assistance |
+| `ai-generated` | Opened autonomously by an AI agent |
 
 Colors are shared per group: all `type:` labels are one color, all `status:` labels are one color, and `priority:` and `size:` are gradients.
 
