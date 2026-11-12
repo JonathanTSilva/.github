@@ -101,7 +101,7 @@
   featured: true
   description: "➕ A modern TUI for managing QEMU development environments"
 
-- name: "SI-Cavitation"
+- name: "research-pump-cavitation"
   target: "research-pump-cavitation"
   kind: research
   visibility: public
@@ -112,7 +112,7 @@
   featured: true
   description: "🔬 Diagnostic system for hydraulic pump failures by means of electric current analysis and machine learning tools"
 
-- name: "SI-Sizer"
+- name: "research-motor-drive-sizer"
   target: "research-motor-drive-sizer"
   kind: research
   visibility: public
@@ -123,7 +123,7 @@
   featured: false
   description: "🔬 Web application for sizing electric motor drive equipment"
 
-- name: "FP-CloudCavitation"
+- name: "research-cloud-cavitation"
   target: "research-cloud-cavitation"
   kind: research
   visibility: public
@@ -134,7 +134,7 @@
   featured: false
   description: "🔬 Cloud-based intelligent system for hydraulic pump failure detection"
 
-- name: "FP-MastersDegree"
+- name: "research-masters-dissertation"
   target: "research-masters-dissertation"
   kind: research
   visibility: public
@@ -145,7 +145,7 @@
   featured: false
   description: "🔬 Projects and dissertation for my Master of Science in Electrical Engineering"
 
-- name: "FP-Dimfot"
+- name: "course-dimfot-android"
   target: "course-dimfot-android"
   kind: course
   visibility: public
@@ -156,7 +156,7 @@
   featured: false
   description: "📖 Android application for the Mobile Computing (E8CPM) course at IFSP Sertãozinho"
 
-- name: "HL-Linux"
+- name: "learn-linux"
   target: "learn-linux"
   kind: learn
   visibility: public
@@ -167,7 +167,7 @@
   featured: false
   description: "🛠 Personal repository to document my learning on Linux"
 
-- name: "HL-Git"
+- name: "learn-git"
   target: "learn-git"
   kind: learn
   visibility: public
@@ -178,7 +178,7 @@
   featured: false
   description: "🛠 Personal repository for testing Git, GitHub and GitFlow commands"
 
-- name: "HL-Python"
+- name: "learn-python"
   target: "learn-python"
   kind: learn
   visibility: public
@@ -189,7 +189,7 @@
   featured: false
   description: "🛠 Personal repository to document my learning on Python"
 
-- name: "HL-Java"
+- name: "learn-java"
   target: "learn-java"
   kind: learn
   visibility: public
@@ -200,7 +200,7 @@
   featured: false
   description: "🛠 Personal repository to document my learning on Java"
 
-- name: "HL-Windows"
+- name: "learn-windows"
   target: "learn-windows"
   kind: learn
   visibility: public
@@ -211,7 +211,7 @@
   featured: false
   description: "🛠 Personal repository to document my learning on Windows"
 
-- name: "TP-IFSP"
+- name: "template-latex-ifsp"
   target: "template-latex-ifsp"
   kind: template
   visibility: public
@@ -222,7 +222,7 @@
   featured: false
   description: "📚 LaTeX templates for the Federal Institute of São Paulo, Sertãozinho campus"
 
-- name: "TP-Standardization"
+- name: "template-standardization"
   target: "template-standardization"
   kind: template
   visibility: public
@@ -233,7 +233,7 @@
   featured: false
   description: "📚 A set of specifications to constrain, organize and standardize projects"
 
-- name: "OD-Cheatsheets"
+- name: "cheatsheets"
   target: "cheatsheets"
   kind: product
   visibility: public
