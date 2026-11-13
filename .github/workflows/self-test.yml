@@ -11,7 +11,6 @@ jobs:
   python:
     permissions:
       contents: read
-      id-token: write
     uses: ./.github/workflows/python.yml
     with:
       working-directory: tests/fixtures/python-min
@@ -19,10 +18,10 @@ jobs:
   node:
     permissions:
       contents: read
-      id-token: write
     uses: ./.github/workflows/node.yml
     with:
       working-directory: tests/fixtures/node-min
+      coverage: true
 
   shell:
     permissions:
@@ -34,7 +33,6 @@ jobs:
   go:
     permissions:
       contents: read
-      id-token: write
     uses: ./.github/workflows/go.yml
     with:
       working-directory: tests/fixtures/go-min
@@ -59,6 +57,107 @@ jobs:
     uses: ./.github/workflows/latex.yml
     with:
       working-directory: tests/fixtures/latex-min
+
+  # Codecov upload through the opt-in coverage workflow, one call per language
+  coverage-python:
+    needs: python
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/coverage.yml
+    with:
+      artifact: coverage
+      flags: python
+
+  coverage-node:
+    needs: node
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/coverage.yml
+    with:
+      artifact: node-coverage
+      flags: node
+
+  coverage-go:
+    needs: go
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/coverage.yml
+    with:
+      artifact: go-coverage
+      flags: go
+
+  # SONAR_TOKEN is not set on this repo, so the scan is skipped with a notice
+  sonar:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/sonar.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  e2e:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/e2e.yml
+    with:
+      working-directory: tests/fixtures/e2e-min
+
+  lighthouse:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/lighthouse.yml
+    with:
+      working-directory: tests/fixtures/lighthouse-min
+      static-dist-dir: site
+      budget-path: budget.json
+
+  load:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/load.yml
+    with:
+      working-directory: tests/fixtures/load-min
+      script: script.js
+      server-command: python3 -m http.server 3000 --bind 127.0.0.1 --directory site
+      server-url: http://127.0.0.1:3000
+      duration: 5s
+      vus: 2
+
+  # this repo has no gh-pages branch, so the history is skipped with a warning
+  bench:
+    permissions:
+      contents: write
+    uses: ./.github/workflows/bench.yml
+    with:
+      working-directory: tests/fixtures/bench-min
+      command: ./bench.sh
+
+  allure-results:
+    name: allure results fixture
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: allure-results
+          path: tests/fixtures/allure-min/allure-results
+          if-no-files-found: error
+          retention-days: 1
+
+  reports:
+    needs: allure-results
+    permissions:
+      contents: write
+    uses: ./.github/workflows/reports.yml
 
   branch-name:
     name: branch-name tests

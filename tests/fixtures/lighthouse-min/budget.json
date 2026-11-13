@@ -1,0 +1,6 @@
+[
+  {
+    "path": "/*",
+    "resourceSizes": [{ "resourceType": "total", "budget": 100 }]
+  }
+]

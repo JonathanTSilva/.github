@@ -46,6 +46,61 @@ jobs:
           else
             uvx check-jsonschema==0.39.0 --builtin-schema vendor.github-actions "${actions[@]}"
           fi
+      - name: Check that existing workflows request no new permissions
+        # GitHub checks a called workflow's permissions statically, so a widened request makes
+        # every existing caller fail at startup. Compare with the handbook's "v1.0 caller grants".
+        shell: bash
+        run: |
+          uv run --no-project --with pyyaml==6.0.2 python - <<'PY'
+          import pathlib
+          import re
+          import sys
+
+          import yaml
+
+          CHECKED = ["python", "node", "shell", "lint-docs", "pr-hygiene"]
+          RANK = {"none": 0, "read": 1, "write": 2}
+
+          text = pathlib.Path("handbook/repo-anatomy.md").read_text()
+          section = re.search(r"^#+ v1\.0 caller grants\s*$(.*?)(?=^#+ |\Z)", text, re.M | re.S)
+          if not section:
+              sys.exit("::error::handbook/repo-anatomy.md has no 'v1.0 caller grants' section")
+
+          grants = {}
+          for line in section.group(1).splitlines():
+              if not line.startswith("|"):
+                  continue
+              cells = [c.strip() for c in line.strip().strip("|").split("|")]
+              names = re.findall(r"`([^`]+)`", cells[0])
+              perms = re.findall(r"`([a-z-]+): (read|write)`", cells[1]) if len(cells) > 1 else []
+              for name in names:
+                  if perms:
+                      grants[name] = dict(perms)
+
+          errors = []
+          for name in CHECKED:
+              if name not in grants:
+                  errors.append(f"{name}: not listed in the v1.0 caller grants table")
+                  continue
+              doc = yaml.safe_load(pathlib.Path(f".github/workflows/{name}.yml").read_text())
+              blocks = {"workflow": doc.get("permissions")}
+              blocks.update({f"job {job}": body.get("permissions") for job, body in doc["jobs"].items()})
+              for where, perms in blocks.items():
+                  if perms is None:
+                      continue
+                  if isinstance(perms, str):
+                      errors.append(f"{name}.yml {where}: '{perms}' is wider than the v1.0 grants")
+                      continue
+                  for scope, level in perms.items():
+                      if RANK[level] > RANK[grants[name].get(scope, "none")]:
+                          errors.append(f"{name}.yml {where}: requests {scope}: {level}, v1.0 callers grant {grants[name].get(scope, 'nothing')}")
+
+          for error in errors:
+              print(f"::error::{error}")
+          if errors:
+              sys.exit(1)
+          print(f"{', '.join(CHECKED)} request nothing beyond the v1.0 caller grants")
+          PY
       - name: Lint workflows
         run: uvx --from actionlint-py==1.7.12.25 actionlint
       - name: Audit workflows

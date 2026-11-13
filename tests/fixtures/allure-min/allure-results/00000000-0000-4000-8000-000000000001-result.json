@@ -1,0 +1,10 @@
+{
+  "uuid": "00000000-0000-4000-8000-000000000001",
+  "historyId": "allure-min-sum",
+  "name": "sum adds two numbers",
+  "fullName": "allure-min.sum adds two numbers",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1700000000000,
+  "stop": 1700000000100
+}
