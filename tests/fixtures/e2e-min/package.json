@@ -1,0 +1,11 @@
+{
+  "name": "e2e-min",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Smallest Playwright project, used to self-test the reusable e2e workflow.",
+  "packageManager": "pnpm@9.15.9",
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
+  }
+}

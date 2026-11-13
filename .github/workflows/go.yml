@@ -11,10 +11,6 @@ on:
         description: Directory of the project, relative to the repository root.
         type: string
         default: "."
-      coverage:
-        description: Upload coverage to Codecov (public repositories only).
-        type: boolean
-        default: true
 
 permissions: {}
 
@@ -50,29 +46,3 @@ jobs:
           name: go-coverage
           path: ${{ inputs.working-directory }}/coverage.out
           if-no-files-found: error
-
-  codecov:
-    name: upload coverage to Codecov
-    needs: check
-    if: ${{ inputs.coverage && !github.event.repository.private }}
-    runs-on: ubuntu-latest
-    # an outage on Codecov's side must never fail CI
-    continue-on-error: true
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: go-coverage
-          path: coverage-report
-      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
-        with:
-          use_oidc: true
-          fail_ci_if_error: false
-          disable_search: true
-          files: coverage-report/coverage.out
-          flags: go

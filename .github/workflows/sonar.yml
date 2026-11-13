@@ -1,0 +1,55 @@
+name: sonar
+
+# Opt-in. SonarQube Cloud scan for public repositories. Skipped, never red, when the
+# SONAR_TOKEN secret is missing (forks, repos not onboarded). Callers pass the secret
+# with `secrets: inherit` or `secrets: { SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} }`.
+# The caller job must grant: contents: read.
+
+on:
+  workflow_call:
+    inputs:
+      organization:
+        description: SonarQube Cloud organization key.
+        type: string
+        default: jonathantsilva
+      project-key:
+        description: SonarQube Cloud project key. Defaults to <owner>_<repo>.
+        type: string
+        default: ""
+      args:
+        description: Extra arguments for the scanner, such as -Dsonar.sources=src.
+        type: string
+        default: ""
+    secrets:
+      SONAR_TOKEN:
+        description: SonarQube Cloud token. The scan is skipped when it is absent.
+        required: false
+
+permissions: {}
+
+jobs:
+  scan:
+    name: SonarQube Cloud scan
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - name: Note a skipped scan
+        if: ${{ env.SONAR_TOKEN == '' }}
+        run: echo "::notice title=SonarQube Cloud skipped::SONAR_TOKEN is not available, so the scan is skipped."
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: ${{ env.SONAR_TOKEN != '' }}
+        with:
+          # the scanner needs the full history for blame and new-code detection
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: SonarSource/sonarqube-scan-action@e805d875275f728fac1885b413934be6d7c63f65 # v8.4.1
+        if: ${{ env.SONAR_TOKEN != '' }}
+        with:
+          args: >-
+            -Dsonar.organization=${{ inputs.organization }}
+            -Dsonar.projectKey=${{ inputs.project-key || format('{0}_{1}', github.repository_owner, github.event.repository.name) }}
+            ${{ inputs.args }}

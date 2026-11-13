@@ -1,0 +1,105 @@
+name: bench
+
+# Opt-in. Runs a benchmark command, compares it with the history on the gh-pages branch and
+# alerts on a regression. On pushes to the default branch the history is pushed to gh-pages
+# under benchmark-data-dir. A repo without a gh-pages branch still runs the command and
+# uploads the results, and skips the history with a warning (create the branch once, see the handbook).
+# The command runs on the stock runner, so Go, Node, Python and Rust are already there.
+# The caller job must grant: contents: write.
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Directory of the project, relative to the repository root.
+        type: string
+        default: "."
+      command:
+        description: Command that runs the benchmarks and writes the results to output-file.
+        type: string
+        required: true
+      output-file:
+        description: Benchmark results file, relative to working-directory.
+        type: string
+        default: bench-output.txt
+      tool:
+        description: Result format, one of cargo, go, benchmarkjs, pytest, googlecpp, catch2, julia, jmh, benchmarkdotnet, customBiggerIsBetter, customSmallerIsBetter.
+        type: string
+        default: customSmallerIsBetter
+      name:
+        description: Name of the benchmark series on the chart.
+        type: string
+        default: Benchmark
+      alert-threshold:
+        description: Ratio against the previous result that raises an alert, such as 150%.
+        type: string
+        default: 150%
+      fail-on-alert:
+        description: Fail the job when a result crosses alert-threshold.
+        type: boolean
+        default: true
+      benchmark-data-dir:
+        description: Directory on gh-pages that holds the history.
+        type: string
+        default: dev/bench
+
+permissions: {}
+
+jobs:
+  bench:
+    name: benchmarks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run benchmarks
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          COMMAND: ${{ inputs.command }}
+        run: bash -euo pipefail -c "$COMMAND"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: benchmark-results
+          path: ${{ inputs.working-directory }}/${{ inputs.output-file }}
+          if-no-files-found: error
+          retention-days: 14
+      - name: Look for the gh-pages branch
+        id: history
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          if gh api "repos/${REPO}/branches/gh-pages" --silent 2>/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Benchmark history skipped::The repository has no gh-pages branch. The results are in the benchmark-results artifact. Create the branch once to keep a history."
+          fi
+      - uses: benchmark-action/github-action-benchmark@4322e5726e6334590d251fc4f92bec0efafc45dc # v1.22.2
+        id: benchmark
+        if: ${{ steps.history.outputs.exists == 'true' }}
+        with:
+          name: ${{ inputs.name }}
+          tool: ${{ inputs.tool }}
+          output-file-path: ${{ inputs.working-directory }}/${{ inputs.output-file }}
+          benchmark-data-dir-path: ${{ inputs.benchmark-data-dir }}
+          github-token: ${{ github.token }}
+          alert-threshold: ${{ inputs.alert-threshold }}
+          fail-on-alert: ${{ inputs.fail-on-alert }}
+          comment-on-alert: true
+          # pull requests compare against the history but never add to it
+          save-data-file: ${{ github.event_name != 'pull_request' }}
+          auto-push: false
+      - name: Push the history to gh-pages
+        if: ${{ always() && steps.history.outputs.exists == 'true' && github.event_name == 'push' && github.ref_name == github.event.repository.default_branch }}
+        # the history is optional, a push failure must never break CI
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          trap 'echo "::warning title=Benchmark history not pushed::Could not push gh-pages. Check that the caller grants contents: write and the branch is not protected."' ERR
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" gh-pages:gh-pages

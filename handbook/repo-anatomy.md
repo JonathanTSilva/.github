@@ -86,34 +86,71 @@ A repo's `ci.yml` is short. It picks reusable workflows from [`.github/workflows
 | `shell` | shellcheck, shfmt, bats | Shell repos |
 | `release` | release-please and provenance, see [releases](releases.md) | Released products |
 
-Planned, not yet built: `e2e`, `lighthouse`, `load`, `bench` and `reports`, each added when a repo needs it.
+Opt-in workflows, each added to `ci.yml` only when a repo wants it:
+
+| Workflow | Does | Needs |
+|---|---|---|
+| `coverage` | Uploads a coverage artifact to Codecov through OIDC, public repos only, never fails CI | Call it after `python`, `node` or `go` with `needs:` and the artifact name |
+| `sonar` | SonarQube Cloud scan, public repos only | The `SONAR_TOKEN` secret, otherwise it is skipped with a notice |
+| `e2e` | Playwright with browsers installed, the HTML report uploaded | A pnpm project with `@playwright/test` |
+| `lighthouse` | Lighthouse CI against a static build or a started server, with a budget file | `static-dist-dir`, `urls` or a `lighthouserc` file |
+| `load` | k6 against a server started from a command, with thresholds as input | A k6 script, default `tests/load/main.js` |
+| `bench` | Benchmarks compared with the history on `gh-pages`, alert on a regression | A `gh-pages` branch for the history |
+| `reports` | Allure report published to `gh-pages` under `/reports/` | An Allure results artifact and a `gh-pages` branch |
 
 ### Coverage
 
-`python`, `node` and `go` take a `coverage` input (default `true`). On public repos they upload to Codecov through OIDC, so no token secret is needed. The upload is a separate `codecov` job that runs only when `inputs.coverage && !github.event.repository.private`. It never fails CI, even when Codecov is down. `node` uploads only when the project has a `coverage` script that writes `coverage/lcov.info`.
+`python` and `go` always upload their coverage file as an artifact (`coverage` and `go-coverage`). `node` does it when called with `coverage: true`, from a `coverage` script that writes `coverage/lcov.info` (artifact `node-coverage`). None of them talks to Codecov, so their permissions did not change. To send the file to Codecov, add a `coverage` job:
+
+```yaml
+  coverage:
+    needs: python
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    uses: JonathanTSilva/.github/.github/workflows/coverage.yml@v1
+    with:
+      artifact: coverage
+      flags: python
+```
+
+The upload runs only on public repos, uses OIDC (no token secret) and has `fail_ci_if_error: false`, so a Codecov outage never turns `ci` red.
 
 ### Permissions a caller must grant
 
-A reusable workflow cannot hold more permissions than the calling job grants, so the caller's job must list them even when the workflow skips the step. Missing `id-token: write` makes the whole run fail at startup.
+A reusable workflow cannot hold more permissions than the calling job grants, and GitHub checks this statically before the run starts. A workflow that asks for a new permission therefore breaks every caller that does not grant it, even when the step is skipped. Existing workflows never widen what they request. New permissions only come with a new opt-in workflow.
+
+#### v1.0 caller grants
+
+These are the grants callers had at `v1.0`. The `validate` workflow fails when `python`, `node`, `shell`, `lint-docs` or `pr-hygiene` requests more than this table.
 
 | Workflow | Permissions the calling job grants |
 |---|---|
-| `python`, `node`, `go` (new `coverage` input) | `contents: read`, `id-token: write` (Codecov OIDC upload) |
-| `rust`, `c-cpp`, `latex` (new) | `contents: read` |
-| `shell`, `lint-docs` | `contents: read` |
+| `python`, `node`, `shell`, `lint-docs` | `contents: read` |
 | `pr-hygiene` | `pull-requests: read` |
 | `security` | `actions: read`, `contents: read`, `id-token: write`, `pull-requests: read`, `security-events: write` |
 | `release` | `contents: write`, `issues: write`, `pull-requests: write`, `id-token: write`, `attestations: write` |
+
+#### Added since v1.0
+
+| Workflow | Permissions the calling job grants |
+|---|---|
+| `go`, `rust`, `c-cpp`, `latex` | `contents: read` |
+| `sonar`, `e2e`, `lighthouse`, `load` | `contents: read` |
+| `coverage` | `actions: read`, `contents: read`, `id-token: write` |
+| `bench`, `reports` | `contents: write` (pushes to `gh-pages`) |
 
 ```yaml
 jobs:
   python:
     permissions:
       contents: read
-      id-token: write
     uses: JonathanTSilva/.github/.github/workflows/python.yml@v1
 ```
 
-Private repos still grant `id-token: write` to `python`, `node` and `go`, but no token is minted because the upload is skipped.
+### Pages-dependent steps
+
+`bench` and `reports` keep their output on the `gh-pages` branch. Create it once per repo (an orphan branch with an empty commit) and set Pages to deploy from it. Without the branch they still run the benchmarks or build the report, upload the result as an artifact and skip publishing with a warning. A failed push is a warning too, never a red `ci`.
 
 Third-party actions are pinned by full commit SHA with a `# vX.Y.Z` comment, and workflows default to read-only permissions. See [security](security.md).

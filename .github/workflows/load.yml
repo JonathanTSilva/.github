@@ -1,0 +1,95 @@
+name: load
+
+# Opt-in. k6 load test against a local server that the workflow starts from a command.
+# Thresholds come from the `thresholds` input, written to a k6 config file. A threshold
+# declared in the script's own `options` wins over the input for the same metric.
+# The caller job must grant: contents: read.
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Directory of the project, relative to the repository root.
+        type: string
+        default: "."
+      script:
+        description: k6 script, relative to working-directory.
+        type: string
+        default: tests/load/main.js
+      server-command:
+        description: Command that starts the server. It is started in the background. Empty skips starting one.
+        type: string
+        default: ""
+      server-url:
+        description: URL polled until the server answers, also exported to the script as BASE_URL.
+        type: string
+        default: http://localhost:3000
+      server-timeout:
+        description: Seconds to wait for the server to answer.
+        type: number
+        default: 60
+      thresholds:
+        description: k6 thresholds as a JSON object.
+        type: string
+        default: '{"http_req_failed":["rate<0.01"],"http_req_duration":["p(95)<500"]}'
+      vus:
+        description: Virtual users.
+        type: number
+        default: 10
+      duration:
+        description: Test duration, such as 30s.
+        type: string
+        default: 30s
+
+permissions: {}
+
+jobs:
+  load:
+    name: k6 load test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: grafana/setup-k6-action@43b9fc21641a76002687994433dd586f56e791b1 # v1.2.2
+      - name: Start the server
+        if: ${{ inputs.server-command != '' }}
+        env:
+          SERVER_COMMAND: ${{ inputs.server-command }}
+          SERVER_URL: ${{ inputs.server-url }}
+          SERVER_TIMEOUT: ${{ inputs.server-timeout }}
+        run: |
+          nohup bash -euo pipefail -c "$SERVER_COMMAND" > "$RUNNER_TEMP/server.log" 2>&1 &
+          for _ in $(seq 1 "$SERVER_TIMEOUT"); do
+            if curl --silent --output /dev/null "$SERVER_URL"; then
+              echo "Server is up at $SERVER_URL"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error title=Server did not start::No answer from $SERVER_URL after ${SERVER_TIMEOUT}s"
+          cat "$RUNNER_TEMP/server.log"
+          exit 1
+      - name: Run k6
+        env:
+          THRESHOLDS: ${{ inputs.thresholds }}
+          SCRIPT: ${{ inputs.script }}
+          VUS: ${{ inputs.vus }}
+          DURATION: ${{ inputs.duration }}
+          BASE_URL: ${{ inputs.server-url }}
+        run: |
+          jq --null-input --argjson thresholds "$THRESHOLDS" '{thresholds: $thresholds}' > "$RUNNER_TEMP/k6-config.json"
+          k6 run --config "$RUNNER_TEMP/k6-config.json" --vus "$VUS" --duration "$DURATION" \
+            --summary-export "$RUNNER_TEMP/k6-summary.json" "$SCRIPT"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: ${{ !cancelled() }}
+        with:
+          name: k6-summary
+          path: ${{ runner.temp }}/k6-summary.json
+          if-no-files-found: ignore
+          retention-days: 14

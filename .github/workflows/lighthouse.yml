@@ -1,0 +1,90 @@
+name: lighthouse
+
+# Opt-in. Lighthouse CI against a static build directory or a server the build starts.
+# Budgets come from a budget.json (path input) or from the assertions in a lighthouserc file.
+# The caller job must grant: contents: read.
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version to run with.
+        type: string
+        default: "24"
+      working-directory:
+        description: Directory of the project, relative to the repository root.
+        type: string
+        default: "."
+      build-command:
+        description: Command that builds the site before the audit. Empty skips the build.
+        type: string
+        default: ""
+      static-dist-dir:
+        description: Built static site to serve, relative to working-directory. Leave empty when config-path starts a server.
+        type: string
+        default: ""
+      urls:
+        description: URLs to audit, one per line. Empty audits every HTML file in static-dist-dir.
+        type: string
+        default: ""
+      budget-path:
+        description: Lighthouse budget file (budget.json), relative to working-directory.
+        type: string
+        default: ""
+      config-path:
+        description: lighthouserc file, relative to working-directory. Use it for startServerCommand and assertions.
+        type: string
+        default: ""
+      runs:
+        description: Number of Lighthouse runs per URL.
+        type: number
+        default: 1
+
+permissions: {}
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check the audit target
+        env:
+          STATIC_DIST_DIR: ${{ inputs.static-dist-dir }}
+          URLS: ${{ inputs.urls }}
+          CONFIG_PATH: ${{ inputs.config-path }}
+        run: |
+          if [ -z "$CONFIG_PATH" ] && [ -z "$STATIC_DIST_DIR" ] && [ -z "$URLS" ]; then
+            echo "::error title=Nothing to audit::Set static-dist-dir, urls or config-path."
+            exit 1
+          fi
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        if: ${{ inputs.build-command != '' }}
+        with:
+          package_json_file: ${{ inputs.working-directory }}/package.json
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: ${{ inputs.build-command != '' && 'pnpm' || '' }}
+          cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
+      - name: Build
+        if: ${{ inputs.build-command != '' }}
+        working-directory: ${{ inputs.working-directory }}
+        env:
+          BUILD_COMMAND: ${{ inputs.build-command }}
+        run: |
+          pnpm install --frozen-lockfile
+          bash -euo pipefail -c "$BUILD_COMMAND"
+      - uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
+        with:
+          urls: ${{ inputs.urls }}
+          staticDistDir: ${{ inputs.static-dist-dir != '' && format('{0}/{1}', inputs.working-directory, inputs.static-dist-dir) || '' }}
+          budgetPath: ${{ inputs.budget-path != '' && format('{0}/{1}', inputs.working-directory, inputs.budget-path) || '' }}
+          configPath: ${{ inputs.config-path != '' && format('{0}/{1}', inputs.working-directory, inputs.config-path) || '' }}
+          runs: ${{ inputs.runs }}
+          uploadArtifacts: true
+          temporaryPublicStorage: false
