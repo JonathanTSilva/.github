@@ -55,9 +55,9 @@ jobs:
       - name: Install browsers
         env:
           BROWSERS: ${{ inputs.browsers }}
-        # BROWSERS is intentionally unquoted so each browser is its own argument
-        # shellcheck disable=SC2086
-        run: pnpm exec playwright install --with-deps $BROWSERS
+        run: |
+          read -r -a browsers <<< "$BROWSERS"
+          pnpm exec playwright install --with-deps "${browsers[@]}"
       - name: Run tests
         env:
           COMMAND: ${{ inputs.command }}

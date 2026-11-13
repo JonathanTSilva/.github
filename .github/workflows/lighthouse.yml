@@ -20,7 +20,7 @@ on:
         type: string
         default: ""
       static-dist-dir:
-        description: Built static site to serve, relative to working-directory. Leave empty when config-path starts a server.
+        description: Built static site to serve, relative to working-directory. Do not combine with config-path.
         type: string
         default: ""
       urls:
@@ -32,7 +32,7 @@ on:
         type: string
         default: ""
       config-path:
-        description: lighthouserc file, relative to working-directory. Use it for startServerCommand and assertions.
+        description: lighthouserc file, relative to working-directory. Use it for startServerCommand and assertions. Do not combine with static-dist-dir.
         type: string
         default: ""
       runs:
@@ -52,16 +52,32 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Check the audit target
+      - name: Prepare the audit
+        id: target
         env:
+          WORKING_DIRECTORY: ${{ inputs.working-directory }}
           STATIC_DIST_DIR: ${{ inputs.static-dist-dir }}
           URLS: ${{ inputs.urls }}
           CONFIG_PATH: ${{ inputs.config-path }}
         run: |
+          if [ -n "$CONFIG_PATH" ] && [ -n "$STATIC_DIST_DIR" ]; then
+            echo "::error title=Conflicting inputs::Use either static-dist-dir or config-path, not both."
+            exit 1
+          fi
           if [ -z "$CONFIG_PATH" ] && [ -z "$STATIC_DIST_DIR" ] && [ -z "$URLS" ]; then
             echo "::error title=Nothing to audit::Set static-dist-dir, urls or config-path."
             exit 1
           fi
+          config=""
+          if [ -n "$CONFIG_PATH" ]; then
+            config="${WORKING_DIRECTORY}/${CONFIG_PATH}"
+          elif [ -n "$STATIC_DIST_DIR" ]; then
+            # the action has no static-dir input, so serve the directory through a generated config
+            config="${RUNNER_TEMP}/lighthouserc.json"
+            jq --null-input --arg dir "${WORKING_DIRECTORY}/${STATIC_DIST_DIR}" \
+              '{ci: {collect: {staticDistDir: $dir}}}' > "$config"
+          fi
+          echo "config=$config" >> "$GITHUB_OUTPUT"
       - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
         if: ${{ inputs.build-command != '' }}
         with:
@@ -82,9 +98,8 @@ jobs:
       - uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
         with:
           urls: ${{ inputs.urls }}
-          staticDistDir: ${{ inputs.static-dist-dir != '' && format('{0}/{1}', inputs.working-directory, inputs.static-dist-dir) || '' }}
           budgetPath: ${{ inputs.budget-path != '' && format('{0}/{1}', inputs.working-directory, inputs.budget-path) || '' }}
-          configPath: ${{ inputs.config-path != '' && format('{0}/{1}', inputs.working-directory, inputs.config-path) || '' }}
+          configPath: ${{ steps.target.outputs.config }}
           runs: ${{ inputs.runs }}
           uploadArtifacts: true
           temporaryPublicStorage: false
