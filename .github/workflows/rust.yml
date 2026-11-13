@@ -1,0 +1,41 @@
+name: rust
+
+on:
+  workflow_call:
+    inputs:
+      toolchain:
+        description: Rust toolchain to run with.
+        type: string
+        default: stable
+      working-directory:
+        description: Directory of the project, relative to the repository root.
+        type: string
+        default: "."
+
+permissions: {}
+
+jobs:
+  check:
+    name: rustfmt, clippy and tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install toolchain
+        env:
+          TOOLCHAIN: ${{ inputs.toolchain }}
+        run: |
+          rustup toolchain install "$TOOLCHAIN" --profile minimal --component clippy --component rustfmt
+          rustup default "$TOOLCHAIN"
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+        with:
+          workspaces: ${{ inputs.working-directory }}
+      - run: cargo fmt --all --check
+      - run: cargo clippy --locked --all-targets --all-features -- -D warnings
+      - run: cargo test --locked --all-features

@@ -1,0 +1,46 @@
+name: latex
+
+on:
+  workflow_call:
+    inputs:
+      main-file:
+        description: Root .tex file, relative to working-directory.
+        type: string
+        default: main.tex
+      working-directory:
+        description: Directory of the document, relative to the repository root.
+        type: string
+        default: "."
+      pdf-artifact:
+        description: Name of the uploaded PDF artifact.
+        type: string
+        default: pdf
+
+permissions: {}
+
+jobs:
+  build:
+    name: latexmk
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-base texlive-latex-recommended texlive-fonts-recommended
+      - name: Build
+        env:
+          MAIN_FILE: ${{ inputs.main-file }}
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build "$MAIN_FILE"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ inputs.pdf-artifact }}
+          path: ${{ inputs.working-directory }}/build/*.pdf
+          if-no-files-found: error

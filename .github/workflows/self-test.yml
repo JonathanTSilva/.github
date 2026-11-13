@@ -11,6 +11,7 @@ jobs:
   python:
     permissions:
       contents: read
+      id-token: write
     uses: ./.github/workflows/python.yml
     with:
       working-directory: tests/fixtures/python-min
@@ -18,6 +19,7 @@ jobs:
   node:
     permissions:
       contents: read
+      id-token: write
     uses: ./.github/workflows/node.yml
     with:
       working-directory: tests/fixtures/node-min
@@ -28,6 +30,35 @@ jobs:
     uses: ./.github/workflows/shell.yml
     with:
       working-directory: tests/fixtures/shell-min
+
+  go:
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/go.yml
+    with:
+      working-directory: tests/fixtures/go-min
+
+  rust:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/rust.yml
+    with:
+      working-directory: tests/fixtures/rust-min
+
+  c-cpp:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/c-cpp.yml
+    with:
+      working-directory: tests/fixtures/c-min
+
+  latex:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/latex.yml
+    with:
+      working-directory: tests/fixtures/latex-min
 
   branch-name:
     name: branch-name tests

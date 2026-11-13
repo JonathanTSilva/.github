@@ -7,9 +7,11 @@
   "packageManager": "pnpm@9.15.9",
   "scripts": {
     "lint": "node --check src/sum.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "coverage": "vitest run --coverage --coverage.reporter=lcov"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.0",
     "vitest": "^4.0.0"
   }
 }
