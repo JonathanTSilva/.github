@@ -1,0 +1,6 @@
+[package]
+name = "rust-min"
+version = "0.1.0"
+edition = "2024"
+description = "Smallest passing Rust project, used to self-test the reusable rust workflow."
+publish = false

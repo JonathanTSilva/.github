@@ -1,0 +1,55 @@
+name: c-cpp
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Directory of the CMake project, relative to the repository root.
+        type: string
+        default: "."
+      build-type:
+        description: CMake build type.
+        type: string
+        default: Release
+      clang-tidy-checks:
+        description: clang-tidy checks, used only when the project has no .clang-tidy file.
+        type: string
+        default: "clang-analyzer-*,bugprone-*,performance-*"
+
+permissions: {}
+
+jobs:
+  check:
+    name: build, ctest, clang-tidy and cppcheck
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install analyzers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang-tidy cppcheck
+      - name: Configure
+        env:
+          BUILD_TYPE: ${{ inputs.build-type }}
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE="$BUILD_TYPE" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+      - run: cmake --build build --parallel
+      - run: ctest --test-dir build --output-on-failure
+      - name: clang-tidy
+        env:
+          CHECKS: ${{ inputs.clang-tidy-checks }}
+        run: |
+          args=(-p build --warnings-as-errors='*')
+          [ -f .clang-tidy ] || args+=("--checks=$CHECKS")
+          # the files compiled by the project, taken from the compilation database (build/ excluded)
+          jq -r '.[].file' build/compile_commands.json | grep -v '/build/' | sort -u | xargs -r clang-tidy "${args[@]}"
+      - name: cppcheck
+        run: |
+          cppcheck --project=build/compile_commands.json --enable=warning,style,performance,portability \
+            --suppress=missingIncludeSystem --inline-suppr --error-exitcode=1 --quiet

@@ -79,9 +79,41 @@ A repo's `ci.yml` is short. It picks reusable workflows from [`.github/workflows
 | `security` | gitleaks; dependency review and Scorecard on public repos | All repos |
 | `python` | uv, ruff, pyright, pytest with coverage | Python repos |
 | `node` | pnpm, eslint, typecheck, vitest | TypeScript and JavaScript repos |
+| `go` | gofmt, go vet, go test with the race detector and coverage | Go repos |
+| `rust` | rustfmt, clippy, cargo test | Rust repos |
+| `c-cpp` | CMake build, ctest, clang-tidy, cppcheck | C and C++ repos |
+| `latex` | latexmk, the PDF uploaded as an artifact | LaTeX repos |
 | `shell` | shellcheck, shfmt, bats | Shell repos |
 | `release` | release-please and provenance, see [releases](releases.md) | Released products |
 
-Planned, not yet built: `go`, `c-cpp`, `latex`, `e2e`, `lighthouse`, `load`, `bench` and `reports`, each added when a repo needs it.
+Planned, not yet built: `e2e`, `lighthouse`, `load`, `bench` and `reports`, each added when a repo needs it.
+
+### Coverage
+
+`python`, `node` and `go` take a `coverage` input (default `true`). On public repos they upload to Codecov through OIDC, so no token secret is needed. The upload is a separate `codecov` job that runs only when `inputs.coverage && !github.event.repository.private`. It never fails CI, even when Codecov is down. `node` uploads only when the project has a `coverage` script that writes `coverage/lcov.info`.
+
+### Permissions a caller must grant
+
+A reusable workflow cannot hold more permissions than the calling job grants, so the caller's job must list them even when the workflow skips the step. Missing `id-token: write` makes the whole run fail at startup.
+
+| Workflow | Permissions the calling job grants |
+|---|---|
+| `python`, `node`, `go` (new `coverage` input) | `contents: read`, `id-token: write` (Codecov OIDC upload) |
+| `rust`, `c-cpp`, `latex` (new) | `contents: read` |
+| `shell`, `lint-docs` | `contents: read` |
+| `pr-hygiene` | `pull-requests: read` |
+| `security` | `actions: read`, `contents: read`, `id-token: write`, `pull-requests: read`, `security-events: write` |
+| `release` | `contents: write`, `issues: write`, `pull-requests: write`, `id-token: write`, `attestations: write` |
+
+```yaml
+jobs:
+  python:
+    permissions:
+      contents: read
+      id-token: write
+    uses: JonathanTSilva/.github/.github/workflows/python.yml@v1
+```
+
+Private repos still grant `id-token: write` to `python`, `node` and `go`, but no token is minted because the upload is skipped.
 
 Third-party actions are pinned by full commit SHA with a `# vX.Y.Z` comment, and workflows default to read-only permissions. See [security](security.md).

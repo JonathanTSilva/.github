@@ -11,6 +11,10 @@ on:
         description: Directory of the project, relative to the repository root.
         type: string
         default: "."
+      coverage:
+        description: Run the project's "coverage" script and upload lcov to Codecov (public repositories only).
+        type: boolean
+        default: true
 
 permissions: {}
 
@@ -20,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      coverage: ${{ steps.coverage.outputs.found }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
@@ -40,3 +46,46 @@ jobs:
       - run: pnpm run --if-present lint
       - run: pnpm run --if-present typecheck
       - run: pnpm run --if-present test
+      # the "coverage" script must write coverage/lcov.info
+      - name: Coverage
+        id: coverage
+        if: ${{ inputs.coverage && !github.event.repository.private }}
+        run: |
+          pnpm run --if-present coverage
+          if [ -f coverage/lcov.info ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No coverage/lcov.info produced, skipping the Codecov upload"
+          fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: ${{ steps.coverage.outputs.found == 'true' }}
+        with:
+          name: node-coverage
+          path: ${{ inputs.working-directory }}/coverage/lcov.info
+          if-no-files-found: error
+
+  codecov:
+    name: upload coverage to Codecov
+    needs: check
+    if: ${{ needs.check.outputs.coverage == 'true' }}
+    runs-on: ubuntu-latest
+    # an outage on Codecov's side must never fail CI
+    continue-on-error: true
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: node-coverage
+          path: coverage-report
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          use_oidc: true
+          fail_ci_if_error: false
+          disable_search: true
+          files: coverage-report/lcov.info
+          flags: node
