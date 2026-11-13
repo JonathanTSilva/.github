@@ -1,4 +1,9 @@
-# .github
+<!-- brand:header:start -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/header-f2ef7ca6-dark.svg">
+  <img alt=".github: Community health defaults, labels and the GitHub standard as data" src="assets/brand/header-f2ef7ca6-light.svg" width="100%">
+</picture>
+<!-- brand:header:end -->
 
 The GitHub standard for [JonathanTSilva](https://github.com/JonathanTSilva), kept as data. The tools in [jts-ops](https://github.com/JonathanTSilva/jts-ops) read these files to audit and apply the standard across every repo.
 
@@ -35,3 +40,10 @@ Change the data file and its schema together, then open a pull request. Branches
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+<!-- brand:footer:start -->
+<p align="right"><a href="https://www.jontobias.com"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JonathanTSilva/.github/main/assets/brand/jontobias-dark.svg">
+  <img alt="jontobias.com" src="https://raw.githubusercontent.com/JonathanTSilva/.github/main/assets/brand/jontobias-light.svg" width="200">
+</picture></a></p>
+<!-- brand:footer:end -->
