@@ -1,7 +1,7 @@
 <!-- brand:header:start -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/header-f2ef7ca6-dark.svg">
-  <img alt=".github: Community health defaults, labels and the GitHub standard as data" src="assets/brand/header-f2ef7ca6-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/header-e6d40705-dark.svg">
+  <img alt=".github: Community health defaults, labels and the GitHub standard as data" src="assets/brand/header-e6d40705-light.svg" width="100%">
 </picture>
 <!-- brand:header:end -->
 
