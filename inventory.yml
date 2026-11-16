@@ -106,7 +106,7 @@
   kind: research
   visibility: public
   fate: keep
-  profile: exempt
+  profile: active
   license: mit
   status: inactive
   featured: true
