@@ -105,10 +105,10 @@
   target: "research-pump-cavitation"
   kind: research
   visibility: public
-  fate: archive
-  profile: archived
+  fate: keep
+  profile: exempt
   license: mit
-  status: archived
+  status: inactive
   featured: true
   description: "🔬 Diagnostic system for hydraulic pump failures by means of electric current analysis and machine learning tools"
 
