@@ -34,4 +34,4 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - uses: JonathanTSilva/.github/actions/branch-name@v1
+      - uses: JonathanTSilva/.github/actions/branch-name@519af5c03bfedbe2602670ed6f4995ba806c0a9a # v1.2.1
