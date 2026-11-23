@@ -30,7 +30,13 @@ jobs:
           persist-credentials: false
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
-          args: --no-progress --exclude-path tests/fixtures "**/*.md"
+          # compare/ links in release-please changelogs point at a tag that exists only
+          # after the release; github.com answers runners with transient 503s.
+          args: >-
+            --no-progress --exclude-path tests/fixtures
+            --exclude '^https://github\.com/[^/]+/[^/]+/compare/'
+            --max-retries 6 --retry-wait-time 10
+            "**/*.md"
           fail: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
