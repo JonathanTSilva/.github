@@ -31,10 +31,14 @@ jobs:
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           # compare/ links in release-please changelogs point at a tag that exists only
-          # after the release; github.com answers runners with transient 503s.
+          # after the release. github.com's HTML pages answer runners with 503s, so
+          # blob links are checked as raw files (same existence check) and every host
+          # is throttled.
           args: >-
             --no-progress --exclude-path tests/fixtures
             --exclude '^https://github\.com/[^/]+/[^/]+/compare/'
+            --remap '^https://github\.com/([^/]+)/([^/]+)/blob/([^#?]+).* https://raw.githubusercontent.com/$1/$2/$3'
+            --host-concurrency 2 --host-request-interval 500ms
             --max-retries 6 --retry-wait-time 10
             "**/*.md"
           fail: true
