@@ -33,12 +33,15 @@ jobs:
           # compare/ links in release-please changelogs point at a tag that exists only
           # after the release. github.com's HTML pages answer runners with 503s, so
           # blob links are checked as raw files (same existence check) and every host
-          # is throttled.
+          # is throttled. 429 and 503 are rate limits, not missing pages (404/410 still
+          # fail); 999 is LinkedIn's answer to bots. A CLI --accept replaces any repo's
+          # lychee.toml accept list, so those codes live here.
           args: >-
             --no-progress --exclude-path tests/fixtures
             --exclude '^https://github\.com/[^/]+/[^/]+/compare/'
             --remap '^https://github\.com/([^/]+)/([^/]+)/blob/([^#?]+).* https://raw.githubusercontent.com/$1/$2/$3'
             --host-concurrency 2 --host-request-interval 500ms
+            --accept '100..=103,200..=299,429,503,999'
             --max-retries 6 --retry-wait-time 10
             "**/*.md"
           fail: true
