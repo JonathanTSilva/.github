@@ -16,6 +16,15 @@ Every repo has a [security policy](https://github.com/JonathanTSilva/.github/blo
 | OpenSSF Scorecard | Workflow and badge on public repos |
 | Provenance | Release artifacts are attested, see [releases](releases.md) |
 
+## OpenSSF Best Practices badge
+
+Public repos with status `wip` or `active` aim for the [OpenSSF Best Practices](https://www.bestpractices.dev) "passing" badge.
+
+- The template renders `.bestpractices.json` at the repo root: the answers to every "passing" criterion, taken from this standard and worded for the repo's stack. Two answers (`know_secure_design`, `know_common_errors`) are left for the maintainer to declare.
+- The maintainer adds the project on bestpractices.dev (GitHub login), which pre-fills the form from that file, reviews each panel and saves it.
+- The project ID goes into the template answer `bestpractices_id`; `copier update` then adds the badge to the README.
+- `jts-ops audit` warns (`files.bestpractices`) when an eligible repo lacks the file. Inactive repos get none, since they would not meet `maintained`.
+
 ## Rulesets
 
 The account is on GitHub Free, so rulesets apply to **public repos only**. On `main` they:
